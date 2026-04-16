@@ -3,11 +3,11 @@ N = 16;             % 子载波数 (DCSK 扩频因子 beta=16)
 N_DFnT = 16;
 L = 2;              
 Block_Num = 2;      
-C = 2;              % 循环前缀长度
+C = 2;              
 Equal = 2;          % 2代表使用 MMSE 均衡
-loop_Num = 100000;   % 循环次数
+loop_Num = 100000;   
 
-EbN0_dB = 0:2:30;   % 横坐标统一为 Eb/N0 
+EbN0_dB = 0:2:30;   
 M_vec = [2, 4];     % 2对应 BPSK/2-DCSK，4对应 QPSK/4-DCSK
 
 total_ber_psk = zeros(length(M_vec), length(EbN0_dB));
