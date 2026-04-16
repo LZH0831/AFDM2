@@ -1,6 +1,6 @@
 function Bitsre = Receiver_MDCSK_rou(rou, N_DFnT, M, N, C, Equal, Symbols1, h, SNR, c1, c2)
     P = N + C;
-    L = length(h); % 动态获取多径数 (1x2 向量的长度 L=2)
+    L = length(h); 
     Block_Num = 2;
     R = [zeros(N, P-N), eye(N)];
     
@@ -43,8 +43,6 @@ function Bitsre = Receiver_MDCSK_rou(rou, N_DFnT, M, N, C, Equal, Symbols1, h, S
         Symbols3(:,:,count) = P_DFnT0 * Symbols2(:,:,count);
     end
 
-    %% 3. ================= 核心修复：构造不完美 CSI 矩阵 =================
-    % 1. 在真实的 1xL 冲激响应上注入误差
     err_h = (1/sqrt(2)) * (randn(size(h)) + 1i*randn(size(h)));
     hi = sqrt(1 - rou^2) * h + rou * err_h; % 得到不完美的信道向量 hi
 
@@ -59,7 +57,6 @@ function Bitsre = Receiver_MDCSK_rou(rou, N_DFnT, M, N, C, Equal, Symbols1, h, S
             end
         end
     end
-    %% ====================================================================
 
     %% 4. 构造 MMSE 均衡矩阵
     S = eye(N);

@@ -1,16 +1,15 @@
 clear; clc; close all;
 
-%% 1. 系统基础参数设定
+%% 1. 参数设定
 N = 16;
 N_DFnT = 16;
 L = 2;              
 Block_Num = 2;    
 C = 2;              
 P = N + C;
-loop_Num = 10000;   % 平滑曲线推荐 20000 次以上
+loop_Num = 10000;   
 Equal = 2;          % 2代表使用 MMSE 均衡
 
-% Fig 2 横坐标: 0 到 30 dB (考虑到运行时间，这里设为步长 2)
 EbN0_dB_vec = 0:2:30; 
 
 %% 2. 方案参数设定
@@ -84,11 +83,10 @@ for idx = 1:length(EbN0_dB_vec)
     fprintf('完成\n');
 end
 
-%% 5. 绘图复现
+%% 5. 绘图
 figure('Name', 'Fig 2 Reproduction');
 box on; hold on; grid on;
 
-% 严格对齐论文中图 2 的线型和颜色
 semilogy(EbN0_dB_vec, ber_ofdm_qpsk, 'b--o', 'LineWidth', 1.5, 'MarkerSize', 7); 
 semilogy(EbN0_dB_vec, ber_afdm_qpsk, 'b--d', 'LineWidth', 1.5, 'MarkerSize', 7);
 semilogy(EbN0_dB_vec, ber_ofdm_bpsk, 'r-s', 'LineWidth', 1.5, 'MarkerSize', 7);

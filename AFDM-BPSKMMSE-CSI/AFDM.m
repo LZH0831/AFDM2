@@ -2,9 +2,9 @@ clear; clc; close all;
 N=4; %子载波数
 N_DFnT=4;
 L=2; %信道长度
-Block_Num=2; %块数
+Block_Num=2; 
 %M=4; %QAM 调制
-C=2; %循坏前缀长度
+C=2; 
 P=N+C;
 loop_Num=10000;%1000000
 S=eye(N);

@@ -68,7 +68,6 @@ function Bitsre=Receiver_MDCSK(N_DFnT,M,N,C,Equal,Symbols1,H0,SNR)
     end
 
     %% M-DCSK 相关解调
-    % 【修复警告】：强制提取实部，过滤信道带来的复数虚部噪声
     rx_ref  = real(Symbols4(:,:,1));
     rx_info = real(Symbols4(:,:,2));
     

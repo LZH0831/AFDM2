@@ -24,14 +24,13 @@ function [Bits,Symbols0]=Transmitter_MDCSK(N_DFnT,M,N,C)
         x = 1 - 2 * x^2; % Logistic Map
     end
     
-    % 【公平性修正 1】：保证混沌序列的平均发射功率为 1
     cx = cx - mean(cx);
     cx = cx / norm(cx) * sqrt(beta); 
     
     % 生成正交混沌序列
     cx_analytic = hilbert(cx);
     cy = imag(cx_analytic);
-    cy = cy / norm(cy) * sqrt(beta); % 保证正交序列平均功率为 1
+    cy = cy / norm(cy) * sqrt(beta); 
     
     % 构造参考块和信息块
     tx_ref = cx;

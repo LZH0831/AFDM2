@@ -1,4 +1,3 @@
-% 复现论文 Fig. 3: M-ary DCSK 在 AWGN 信道下的 BER 性能曲线 (\beta = 60)
 clear; clc; close all;
 
 beta = 60;                  

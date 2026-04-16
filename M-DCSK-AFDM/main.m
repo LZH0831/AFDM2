@@ -1,8 +1,8 @@
 clear; clc; close all;
 N = 16;             % 子载波数 (DCSK 扩频因子 beta=16)
 N_DFnT = 16;
-L = 2;              % 信道长度 (2-path)
-Block_Num = 2;      % 原版 PSK 和 DCSK 都使用 2 个块
+L = 2;              
+Block_Num = 2;      
 C = 2;              % 循环前缀长度
 Equal = 2;          % 2代表使用 MMSE 均衡
 loop_Num = 100000;   % 循环次数
@@ -10,7 +10,6 @@ loop_Num = 100000;   % 循环次数
 EbN0_dB = 0:2:30;   % 横坐标统一为 Eb/N0 
 M_vec = [2, 4];     % 2对应 BPSK/2-DCSK，4对应 QPSK/4-DCSK
 
-% 预分配内存保存 BER 结果
 total_ber_psk = zeros(length(M_vec), length(EbN0_dB));
 total_ber_dcsk = zeros(length(M_vec), length(EbN0_dB));
 
@@ -24,10 +23,7 @@ for m_idx = 1:length(M_vec)
         dB = EbN0_dB(snr_idx);
         EbN0_linear = 10^(dB/10); 
         
-        % 【公平性修正 2】：根据各自的频谱效率计算实际注入信道的物理 SNR
-        % PSK: 1个子载波传 log2(M) 个比特
         SNR_psk_linear = EbN0_linear * log2(M);
-        % DCSK: 2N个子载波传 log2(M) 个比特 (频谱效率极低，物理噪声必须更大才公平)
         SNR_dcsk_linear = EbN0_linear * (log2(M) / (2 * N));
         
         err_bits_psk = 0;
@@ -60,11 +56,8 @@ end
 figure('Position', [150, 150, 800, 600]);
 hold on; grid on; box on;
 
-% 绘制原版 M-PSK-AFDM 曲线 
 semilogy(EbN0_dB, total_ber_psk(1,:), 'r>-', 'LineWidth', 1.5,  'MarkerSize', 6);
 semilogy(EbN0_dB, total_ber_psk(2,:), 'rs-', 'LineWidth', 1.5,  'MarkerSize', 6);
-
-% 绘制融合 M-DCSK-AFDM 曲线 
 semilogy(EbN0_dB, total_ber_dcsk(1,:), 'bo-', 'LineWidth', 1.5, 'MarkerSize', 7);
 semilogy(EbN0_dB, total_ber_dcsk(2,:), 'bd-', 'LineWidth', 1.5, 'MarkerSize', 7);
 

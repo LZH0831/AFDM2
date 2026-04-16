@@ -1,6 +1,6 @@
 clear; clc; close all;
 
-%% 1. 系统基础参数设定
+%% 1. 参数设定
 N = 16;
 N_DFnT = 16;
 L = 2;              
@@ -14,7 +14,7 @@ Equal = 2;
 rou = 0.1;          % 不完美 CSI
 EbN0_dB_vec = 0:2:24;
 
-%% 2. 定义 DFnT 参数 (继承你的设定)
+%% 2. 定义 DFnT 参数 
 c1_afdm5 = 5/(2*N_DFnT); c2_afdm5 = 1.414; 
 c1_afdm9 = 9/(2*N_DFnT); c2_afdm9 = 0.4; 
 
@@ -33,7 +33,7 @@ for idx = 1:length(EbN0_dB_vec)
     dB = EbN0_dB_vec(idx);
     EbN0_linear = 10^(dB/10);
     
-    % 物理 SNR 折算
+    
     SNR_psk_linear  = EbN0_linear * bits_per_symbol;
     SNR_dcsk_linear = EbN0_linear * (bits_per_symbol / (2 * N));
     
